@@ -1,19 +1,21 @@
 import React from 'react';
 
+const UniversityList = ({ universities }) => {
+  console.log(universities);
 
-export default UniversityList = ({universities }) => {
-    return (
-        <div>
-      {universities.map((university, index) => (
-        <div key={index}>
-          <a href={university.url} target="_blank" rel="noopener noreferrer">
+  return (
+    <div>
+      <h2>University List</h2>
+      {universities.map((university, i) => (
+        <div key={i}>
+          <a href=
+            {university.url} target="_blank" rel="noopener noreferrer">
             {university.name}
           </a>
         </div>
       ))}
-        </div>
-    )
+    </div>
+  );
+};
 
-
-}
-
+export default UniversityList;

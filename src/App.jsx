@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
-import UniversityList from './components/UniversityList';
 import SearchBar from './components/SearchBar';
+import UniversityList from './components/UniversityList';
 
 import './App.css'
 
@@ -17,14 +17,13 @@ function App() {
         if (uniArray.error) {
           throw new Error(uniArray.error);
         }
-        const uniList = uniArray.map((university)=>{
-          return {
-            name: university.name,
-            url: university.web_pages[0]
-          }
-        });
-        setUniversities(uniList);
-        console.log(uniArray)
+        setUniversities(uniArray.map((university) => ({
+          name: university.name,
+          url: university.web_pages[0],
+        })));
+
+
+
       } catch (error) {
         console.error('Errore', error.message);
       }
@@ -32,18 +31,25 @@ function App() {
       fetchUni();
     }, []); 
 
+    const handleFilteredUniversities = (filteredUni) => {
+      setUniversities(filteredUni);
+
 
   
 
   return (
     <>
+    <div>
       <SearchBar 
-        onSearch={(searchValue)=>(setSearchValue)}
+        allUniversities={universities}
+        filteredUniversities={handleFilteredUniversities}
         />
-      <UniversityList/>
+      <UniversityList 
+        universities={universities}/>
+    </div>
 
     </>
   );
 }
-
-export default App
+}
+export default App;

@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 
-export default SearchBar = ({onSearch}) => {
+const SearchBar = ({universities, filteredUniversities}) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleSearch = () => {
         const filtroUni = universities.filter(university =>
-          university.name.toLowerCase().includes(searchTerm.toLowerCase())
+          university.name.toLowerCase().includes(inputValue.toLowerCase())
         );
     
-        setUniversities(filtroUni);
+        filteredUniversities(filtroUni);
+    };
+
     return (
         <>
-        <input 
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)} />
-        <button onClick={() => onSearch(inputValue)}>Cerca</button>
+        <div>
+            <input 
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)} />
+            <button onClick={handleSearch}>Cerca</button>
+        </div>
         </>
     );
 
 
 };
-}
+
+
+export default SearchBar
